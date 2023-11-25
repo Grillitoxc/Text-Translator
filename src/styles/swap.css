@@ -1,0 +1,27 @@
+.container .center {
+  position: relative;
+}
+
+.swap-position {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 5px solid var(--bg-color);
+  color: var(--primary-text-color);
+  background-color: var(--primary-color);
+  transition: color 0.3s linear, border 0.3s linear, background-color 0.3s linear;
+}
+
+.swap-position:hover {
+  border: 5px solid var(--primary-color);
+  color: var(--primary-color);
+  background-color: var(--bg-color);
+}
