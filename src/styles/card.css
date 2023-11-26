@@ -26,6 +26,15 @@ body {
   color: var(--text-color);
 }
 
+body.dark {
+  --bg-color: #111116;
+  --bg-light-color: #1c1b20;
+  --text-color: #fff;
+  --text-light-color: #58575c;
+  --primary-text-color: #fff;
+  --text-header-color: #cdccd1;
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -176,13 +185,26 @@ body {
   transform: scale(1.1);
 }
 
-
 @media screen and (max-width: 768px) {
   .container {
     flex-direction: column;
+    margin-bottom: 30px;
   }
 
   .container .card {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .card .from-text {
+    flex-direction: column;
+    font-size: 0.9rem;
+    gap: 10px;
+  }
+
+  .container .text-area .icons-container span {
+    margin-right: 5px;
+    font-size: 0.9rem;
   }
 }

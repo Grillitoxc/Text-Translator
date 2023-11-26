@@ -4,6 +4,7 @@ import './styles/card.css'
 import './styles/swap.css'
 import './styles/scrollbar.css'
 import './styles/header-footer.css'
+import './styles/toggle-darkmode.css'
 import { SUPPORTED_LANGUAGES } from './constants'
 import { type Language, type LanguageOptions } from './types'
 import { useDebounce } from './hooks/Debounce'
@@ -108,6 +109,12 @@ function App () {
     })
   }
 
+  const [isDarkMode, setIsDarkMode] = useState(false)
+  const toggleDarkMode = () => {
+    setIsDarkMode(prevMode => !prevMode)
+    document.body.classList.toggle('dark', !isDarkMode)
+  }
+
   return (
     <>
       <div className="header">
@@ -204,6 +211,12 @@ function App () {
           onClick={() => { openLink(githubAuthor) }}>
           Hecho por <span className='github-author'>Grillitoxc</span>
         </p>
+        <div className="toggle-switch">
+          <label className="switch-label">
+            <input type="checkbox" className="checkbox" onClick={toggleDarkMode} />
+            <span className="slider" ></span>
+          </label>
+        </div>
       </div>
     </>
   )
