@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useStore } from './hooks/Store'
 import './styles/card.css'
 import './styles/swap.css'
@@ -49,6 +49,27 @@ function App () {
       console.error('No se pudo traducir el texto: ', error)
     })
   }, [debouncedInputText, fromLanguage, toLanguage])
+
+  const inputDropdownRef = useRef<HTMLDivElement>(null)
+  const outputDropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        inputDropdownRef.current !== null &&
+        !inputDropdownRef.current.contains(event.target as Node) &&
+        outputDropdownRef.current !== null &&
+        !outputDropdownRef.current.contains(event.target as Node)
+      ) {
+        setInputDropdownOpen(false)
+        setOutputDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [inputDropdownRef, outputDropdownRef])
 
   const toggleInputDropdown = () => {
     setInputDropdownOpen(!inputDropdownOpen)
@@ -124,7 +145,7 @@ function App () {
         <div className="card input-wrapper">
           <div className="from-text">
             <span className="heading">Idioma:</span>
-            <div className={`dropdown-container ${inputDropdownOpen ? 'active' : ''}`} id="input-text">
+            <div className={`dropdown-container ${inputDropdownOpen ? 'active' : ''}`} ref={inputDropdownRef} id="input-text">
               <div className="dropdown-toggle" onClick={toggleInputDropdown}>
                 <i className="fa-solid fa-globe"></i>
                 <span className="selected">{inputSelectedLanguage}</span>
@@ -170,7 +191,7 @@ function App () {
         <div className='card output-wrapper'>
           <div className="from-text">
             <span className="heading">Idioma:</span>
-            <div className={`dropdown-container ${outputDropdownOpen ? 'active' : ''}`} id="input-text">
+            <div className={`dropdown-container ${outputDropdownOpen ? 'active' : ''}`} ref={outputDropdownRef} id="input-text">
               <div className="dropdown-toggle" onClick={toggleOutputDropdown}>
                 <i className="fa-solid fa-globe"></i>
                 <span className="selected">{outputSelectedLanguage}</span>
