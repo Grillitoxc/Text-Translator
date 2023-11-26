@@ -5,6 +5,7 @@
   --bg-color: #f0f0f0;
   --bg-light-color: #fff;
   --text-color: #111116;
+  --text-header-color: #37373e;
   --text-light-color: #cdccd1;
   --primary-text-color: #fff;
 }
@@ -28,9 +29,13 @@ body {
 .container {
   display: flex;
   flex-direction: row;
-  width: 1200px;
+  flex-wrap: wrap;
+  width: 90vw;
+  max-width: 1200px;
   padding: 0 20px;
   gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 50px;
 }
 
 .container .card {
@@ -139,11 +144,45 @@ body {
   border-radius: 10px;
 }
 
-.container .text-area .chars {
+.container .text-area .icons-container {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between; /* Distribuye los elementos al extremo de los ejes */
+}
+
+.container .text-area .icons-container span {
   margin-right: 25px;
-  font-size: 0.8rem;
-  color: var(--light-text-color);
+  font-size: 1rem;
+  color: var(--text-header-color);
+}
+
+.container .text-area .icons {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-left: 20px;
+  font-size: 1.3rem;
+  gap: 20px;
+}
+
+.container .text-area .icons i {
+  cursor: pointer;
+  color: var(--text-color);
+  transition: all 0.3s;
+}
+
+.container .text-area .icons i:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .container .card {
+    width: 100%;
+  }
 }

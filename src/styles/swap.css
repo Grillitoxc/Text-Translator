@@ -25,3 +25,13 @@
   color: var(--primary-color);
   background-color: var(--bg-color);
 }
+
+@media screen and (max-width: 768px) {
+  .swap-position {
+    top: -25px;
+  }
+
+  .swap-position i {
+    transform: rotate(90deg);
+  }
+}
